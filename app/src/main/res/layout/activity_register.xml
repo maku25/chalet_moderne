@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activities.RegisterActivity">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="23dp" />
+
+    <Button
+        android:id="@+id/btnBackHome2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="backHome2"
+        android:text="Retour"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:layout_editor_absoluteX="33dp" />
+
+    <EditText
+        android:id="@+id/editTextLoginRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnBackHome2" />
+
+    <EditText
+        android:id="@+id/editTextPasswordRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLoginRegister" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="register"
+        android:text="S'inscrire"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPasswordRegister" />
+
+    <Button
+        android:id="@+id/btnGoLogin2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="goToLogin"
+        android:text="Se connecter"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegister"
+        tools:layout_editor_absoluteX="144dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
