@@ -50,7 +50,6 @@
             android:background="@android:drawable/edit_text"
             android:hint="Login"
             android:padding="10dp"
-            android:textColor="@android:color/white"
             android:textColorHint="#CCCCCC" />
 
 
@@ -63,7 +62,6 @@
             android:hint="Mot de passe"
             android:inputType="textPassword"
             android:padding="10dp"
-            android:textColor="@android:color/white"
             android:textColorHint="#CCCCCC" />
 
         <Button
