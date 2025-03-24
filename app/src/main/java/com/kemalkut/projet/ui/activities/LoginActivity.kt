@@ -109,7 +109,6 @@ class LoginActivity : AppCompatActivity() {
                     if (authResponse != null) {
                         val token = authResponse.token
                         Toast.makeText(this, "Connexion réussie", Toast.LENGTH_SHORT).show()
-                        // Redirigez vers l'activité qui affiche les périphériques, par exemple DevicesActivity
                         val intent = Intent(this, DevicesActivity::class.java)
                         intent.putExtra("TOKEN", token)
                         startActivity(intent)

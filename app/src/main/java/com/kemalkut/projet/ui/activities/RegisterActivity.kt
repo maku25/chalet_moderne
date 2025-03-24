@@ -106,6 +106,7 @@ class RegisterActivity : AppCompatActivity() {
                 }
                 409 -> Toast.makeText(this, "Login déjà utilisé", Toast.LENGTH_LONG).show()
                 400 -> Toast.makeText(this, "Données incorrectes", Toast.LENGTH_LONG).show()
+                500 -> Toast.makeText(this, "Une erreur s'est produite au nivveau du serveur", Toast.LENGTH_LONG).show()
                 else -> Toast.makeText(this, "Erreur lors de l'inscription, code: $responseCode", Toast.LENGTH_LONG).show()
             }
         }
