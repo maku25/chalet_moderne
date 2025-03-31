@@ -12,6 +12,10 @@ import com.kemalkut.projet.R
 /**
  * MainActivity: page d'accueil de l'application.
  * Elle permet à l'utilisateur de choisir de se connecter ou de s'inscrire.
+ *
+ *
+ * github du prof cmeunier-ub
+ *
  */
 class MainActivity : AppCompatActivity() {
 

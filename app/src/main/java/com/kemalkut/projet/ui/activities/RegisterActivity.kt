@@ -16,6 +16,8 @@ import com.kemalkut.projet.model.UserData
 // A FAIRE !!!!
 // Vérification des caractères -> uniquement des chiffres et des lettres pour le login et le mdp
 
+// liés le boutton retour je l'ai changé en Imagebutton et je vois pas ou tu la declarer ( pour les 2 Ui )
+
 /**
  * RegisterActivity gère l'inscription des nouveaux utilisateurs.
  * Elle permet de saisir un login et un mot de passe, effectue des vérifications de base,
