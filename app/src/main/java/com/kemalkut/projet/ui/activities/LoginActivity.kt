@@ -109,7 +109,7 @@ class LoginActivity : AppCompatActivity() {
                     if (authResponse != null) {
                         val token = authResponse.token
                         Toast.makeText(this, "Connexion réussie", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this, HousesActivity::class.java)
+                        val intent = Intent(this, UserDashboard::class.java)
                         intent.putExtra("TOKEN", token)
                         startActivity(intent)
                         finish()

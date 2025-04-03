@@ -9,6 +9,12 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.kemalkut.projet.R
 
+//user123
+//user456
+//motdepasse
+
+//https://polyhome.lesmoulinsdudev.com/?houseId=505
+
 /**
  * MainActivity: page d'accueil de l'application.
  * Elle permet à l'utilisateur de choisir de se connecter ou de s'inscrire.
