@@ -5,24 +5,18 @@
     android:id="@+id/main"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background_image">
 
-
-    <ImageView
-        android:id="@+id/background_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/background_image"/>
 
     <LinearLayout
         android:layout_width="404dp"
         android:layout_height="722dp"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@+id/background_image"
-        app:layout_constraintEnd_toEndOf="@+id/background_image"
-        app:layout_constraintStart_toStartOf="@+id/background_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
@@ -31,13 +25,14 @@
             android:layout_height="55dp"
             android:layout_gravity="start"
             android:background="@android:color/transparent"
+            android:onClick="backHome2"
             android:src="@drawable/ic_arrow_back"
             app:tint="@android:color/white" />
 
         <LinearLayout
             android:id="@+id/signup_container"
-            android:layout_width="381dp"
-            android:layout_height="538dp"
+            android:layout_width="404dp"
+            android:layout_height="551dp"
             android:background="#80000000"
             android:gravity="center"
             android:orientation="vertical"

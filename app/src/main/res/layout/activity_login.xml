@@ -28,7 +28,8 @@
             android:layout_gravity="start"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_arrow_back"
-            app:tint="@android:color/white" />
+            app:tint="@android:color/white"
+            android:onClick="backHome1"/>
 
         <LinearLayout
             android:id="@+id/login_container"

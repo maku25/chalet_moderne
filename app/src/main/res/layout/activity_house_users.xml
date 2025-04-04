@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:background="@drawable/background_image"
+    android:padding="24dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -7,50 +10,83 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.HouseUsersActivity">
 
-    <TextView
-        android:id="@+id/textViewUsersTitle"
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/btn_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Utilisateurs de la maison"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ListView
-        android:id="@+id/listViewUsers"
-        android:layout_width="334dp"
-        android:layout_height="206dp"
-        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewUsersTitle" />
+        android:gravity="center"
+        android:layout_marginTop="16dp">
 
-    <TextView
-        android:id="@+id/textViewAddUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Ajouter un utilisateur"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listViewUsers" />
+        <ImageButton
+            android:id="@+id/btnBackkk"
+            android:layout_width="48dp"
+            android:layout_height="55dp"
+            android:layout_gravity="start"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="@android:color/white" />
 
-    <AutoCompleteTextView
-        android:id="@+id/autoCompleteUserSearch"
-        android:layout_width="237dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="32dp"
-        android:hint="Rechercher un utilisateu"
-        app:layout_constraintBottom_toTopOf="@+id/buttonAddUser"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAddUser"
-        tools:layout_editor_absoluteX="42dp" />
+        <LinearLayout
+            android:layout_width="353dp"
+            android:layout_height="592dp"
+            android:background="#80000000"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/buttonAddUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:onClick="onAddUserClick"
-        android:text="Donner accès"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/autoCompleteUserSearch" />
+            <TextView
+                android:id="@+id/textViewUsersTitle"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="Utilisateurs de la maison"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <ListView
+                android:id="@+id/listViewUsers"
+                android:layout_width="334dp"
+                android:layout_height="206dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/white" />
+
+
+            <TextView
+                android:id="@+id/textViewAddUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
+                android:text="Ajouter un utilisateur"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteUserSearch"
+                android:layout_width="238dp"
+                android:layout_height="51dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
+                android:hint="Rechercher un utilisateur"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/buttonAddUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="#A83A36"
+                android:onClick="onAddUserClick"
+                android:text="Donner accès" />
+        </LinearLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
