@@ -78,7 +78,6 @@ class UserDashboardActivity : AppCompatActivity() {
                         sharedHouses.add(house)
                     }
                 }
-
                 ownerHouseTitle.text = "Maison ${ownerHouse?.houseId}"
 
                 val adapter = HouseAdapter(this, sharedHouses)
@@ -112,7 +111,7 @@ class UserDashboardActivity : AppCompatActivity() {
     }
 
     public fun handleHouse(view: View) {
-        if (ownerHouse != null && token.isNotEmpty() && devices.size >= 0) {
+        if (ownerHouse != null && token.isNotEmpty() && ::devices.isInitialized) {
             val intent = Intent(this, HouseActivity::class.java)
             intent.putExtra("HOUSE_ID", ownerHouse!!.houseId)
             intent.putExtra("TOKEN", token)

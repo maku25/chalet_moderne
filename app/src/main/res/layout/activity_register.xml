@@ -16,83 +16,92 @@
         android:src="@drawable/background_image"/>
 
     <LinearLayout
-        android:id="@+id/signup_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="#80000000"
+        android:layout_width="404dp"
+        android:layout_height="722dp"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/background_image"
         app:layout_constraintEnd_toEndOf="@+id/background_image"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/background_image">
+        app:layout_constraintStart_toStartOf="@+id/background_image"
+        app:layout_constraintTop_toTopOf="parent">
 
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:text="INSCRIPTION"
-            android:textColor="@android:color/white"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-
-        <EditText
-            android:id="@+id/editTextLoginRegister"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
-            android:background="@android:drawable/edit_text"
-            android:hint="login"
-            android:inputType="textEmailAddress"
-            android:padding="10dp"
-            android:textColorHint="#CCCCCC" />
-
-
-        <EditText
-            android:id="@+id/editTextPasswordRegister"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
-            android:background="@android:drawable/edit_text"
-            android:hint="Mot de passe"
-            android:inputType="textPassword"
-            android:padding="10dp"
-            android:textColorHint="#CCCCCC" />
-
-
-        <Button
-            android:id="@+id/btnRegister"
-            android:layout_width="match_parent"
-            android:onClick="register"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="#A83A36"
-            android:text="S'inscrire"
-            android:textColor="@android:color/white" />
-
-        <Button
-            android:id="@+id/btnGoLogin2"
-            android:layout_width="match_parent"
-            android:onClick="goToLogin"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="#A83A36"
-            android:text="Se connecter"
-            android:textColor="@android:color/white" />
-        <Button
+        <ImageButton
             android:id="@+id/btnBackHome2"
-            android:layout_width="match_parent"
-            android:onClick="backHome2"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="#A83A36"
-            android:text="Retour"
-            android:textColor="@android:color/white" />
+            android:layout_width="48dp"
+            android:layout_height="55dp"
+            android:layout_gravity="start"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="@android:color/white" />
+
+        <LinearLayout
+            android:id="@+id/signup_container"
+            android:layout_width="381dp"
+            android:layout_height="538dp"
+            android:background="#80000000"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="INSCRIPTION"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+
+            <EditText
+                android:id="@+id/editTextLoginRegister"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:background="@android:drawable/edit_text"
+                android:hint="login"
+                android:inputType="textEmailAddress"
+                android:padding="10dp"
+                android:textColorHint="#CCCCCC" />
+
+
+            <EditText
+                android:id="@+id/editTextPasswordRegister"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:background="@android:drawable/edit_text"
+                android:hint="Mot de passe"
+                android:inputType="textPassword"
+                android:padding="10dp"
+                android:textColorHint="#CCCCCC" />
+
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#A83A36"
+                android:onClick="register"
+                android:text="S'inscrire"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/btnGoLogin2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#A83A36"
+                android:onClick="goToLogin"
+                android:text="( Vous avez déja un compte ? ) Connectez vous"
+                android:textColor="@android:color/white" />
+
+
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
