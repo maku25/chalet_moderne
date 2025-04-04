@@ -11,8 +11,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.kemalkut.projet.R
 import com.kemalkut.projet.api.Api
-import com.kemalkut.projet.model.AuthResponse
-import com.kemalkut.projet.model.UserData
+import com.kemalkut.projet.model.user.AuthResponseData
+import com.kemalkut.projet.model.user.UserData
 
 // A FAIRE !!!!
 // Vérification des caractères -> uniquement des chiffres et des lettres pour le login et le mdp
@@ -82,7 +82,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         val user = UserData(loginText, passwordText)
-        Api().post<UserData, AuthResponse>(
+        Api().post<UserData, AuthResponseData>(
             "https://polyhome.lesmoulinsdudev.com/api/users/auth",
             user,
             ::loginSuccess
@@ -100,26 +100,27 @@ class LoginActivity : AppCompatActivity() {
      * - Pour tout autre code, un message d'erreur générique est affiché.
      *
      * @param responseCode Le code HTTP renvoyé par le serveur.
-     * @param authResponse L'objet AuthResponse contenant le token d'authentification, ou null si la réponse est invalide.
+     * @param authResponse L'objet AuthResponseData contenant le token d'authentification, ou null si la réponse est invalide.
      */
-    fun loginSuccess(responseCode: Int, authResponse: AuthResponse?) {
-        runOnUiThread {
-            when(responseCode) {
-                200 -> {
-                    if (authResponse != null) {
-                        val token = authResponse.token
-                        Toast.makeText(this, "Connexion réussie", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this, UserDashboard::class.java)
-                        intent.putExtra("TOKEN", token)
-                        startActivity(intent)
-                        finish()
-                    } else {
-                        Toast.makeText(this, "Réponse invalide", Toast.LENGTH_LONG).show()
-                    }
+    fun loginSuccess(responseCode: Int, authResponse: AuthResponseData?) {
+    runOnUiThread {
+            if (responseCode == 200) {
+                if (authResponse != null) {
+                    val token = authResponse.token
+                    Toast.makeText(this, "Connexion réussie", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, UserDashboardActivity::class.java)
+                    intent.putExtra("TOKEN", token)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    Toast.makeText(this, "Erreur lors de la connexion, code: $responseCode", Toast.LENGTH_LONG).show()
                 }
-                404 -> Toast.makeText(this, "Login inconnu", Toast.LENGTH_LONG).show()
-                400 -> Toast.makeText(this, "Données incorrectes", Toast.LENGTH_LONG).show()
-                else -> Toast.makeText(this, "Erreur lors de la connexion, code: $responseCode", Toast.LENGTH_LONG).show()
+            } else if (responseCode == 404) {
+                Toast.makeText(this, "Login inconnu", Toast.LENGTH_LONG).show()
+            } else if (responseCode == 400) {
+                Toast.makeText(this, "Données incorrectes", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, "Erreur lors de la connexion, code: $responseCode", Toast.LENGTH_LONG).show()
             }
         }
     }

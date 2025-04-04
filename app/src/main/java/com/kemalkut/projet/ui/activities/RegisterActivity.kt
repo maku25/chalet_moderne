@@ -11,14 +11,14 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.kemalkut.projet.api.Api
 import com.kemalkut.projet.R
-import com.kemalkut.projet.model.UserData
+import com.kemalkut.projet.model.user.UserData
 
 // A FAIRE !!!!
 // Vérification des caractères -> uniquement des chiffres et des lettres pour le login et le mdp
 
 /**
  * RegisterActivity gère l'inscription des nouveaux utilisateurs.
- * Elle permet de saisir un login et un mot de passe, effectue des vérifications de base,
+ * Elle permet de saisir un login et un mot de passe.
  * et envoie ensuite les données au serveur via l'API.
  */
 class RegisterActivity : AppCompatActivity() {
@@ -99,15 +99,17 @@ class RegisterActivity : AppCompatActivity() {
      */
     private fun registerSuccess(responseCode: Int) {
         runOnUiThread {
-            when(responseCode) {
-                200 -> {
-                    Toast.makeText(this, "Inscription réussie", Toast.LENGTH_SHORT).show()
-                    finish()
-                }
-                409 -> Toast.makeText(this, "Login déjà utilisé", Toast.LENGTH_LONG).show()
-                400 -> Toast.makeText(this, "Données incorrectes", Toast.LENGTH_LONG).show()
-                500 -> Toast.makeText(this, "Une erreur s'est produite au nivveau du serveur", Toast.LENGTH_LONG).show()
-                else -> Toast.makeText(this, "Erreur lors de l'inscription, code: $responseCode", Toast.LENGTH_LONG).show()
+            if (responseCode == 200) {
+                Toast.makeText(this, "Inscription réussie", Toast.LENGTH_SHORT).show()
+                finish()
+            } else if (responseCode == 409) {
+                Toast.makeText(this, "Login déjà utilisé", Toast.LENGTH_SHORT).show()
+            } else if (responseCode == 400) {
+                Toast.makeText(this, "Données incorrectes", Toast.LENGTH_LONG).show()
+            } else if (responseCode == 500) {
+                Toast.makeText(this, "Une erreur s'est produite au niveau du serveur", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, "Erreur lors de l'inscription, code: $responseCode", Toast.LENGTH_LONG).show()
             }
         }
     }

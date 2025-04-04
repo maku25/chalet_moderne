@@ -15,6 +15,18 @@
         android:theme="@style/Theme.Projet"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activities.HouseDevicesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.HouseUsersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.HouseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.UserDashboardActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activities.LoginActivity"
             android:exported="false" />
         <activity
