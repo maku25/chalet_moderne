@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activities.HouseUsersActivity">
+
+    <TextView
+        android:id="@+id/textViewUsersTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Utilisateurs de la maison"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/listViewUsers"
+        android:layout_width="334dp"
+        android:layout_height="206dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUsersTitle" />
+
+    <TextView
+        android:id="@+id/textViewAddUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Ajouter un utilisateur"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listViewUsers" />
+
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteUserSearch"
+        android:layout_width="237dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="32dp"
+        android:hint="Rechercher un utilisateu"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAddUser"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAddUser"
+        tools:layout_editor_absoluteX="42dp" />
+
+    <Button
+        android:id="@+id/buttonAddUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:onClick="onAddUserClick"
+        android:text="Donner accès"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/autoCompleteUserSearch" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

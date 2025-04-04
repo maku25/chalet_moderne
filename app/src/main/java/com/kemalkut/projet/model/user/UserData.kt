@@ -1,4 +1,4 @@
-package com.kemalkut.projet.model
+package com.kemalkut.projet.model.user
 
 /**
  * Représente les informations d'un utilisateur utilisées pour l'inscription ou la connexion.
