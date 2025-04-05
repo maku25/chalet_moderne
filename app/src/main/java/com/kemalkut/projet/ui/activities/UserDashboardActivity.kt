@@ -124,4 +124,8 @@ class UserDashboardActivity : AppCompatActivity() {
     public fun refresh(view: View) {
         ownerHouse?.let { fetchDevicesCount(it.houseId) }
     }
+
+    public fun msg(view: View) {
+        Toast.makeText(this, "Déconnexion impossible -> fonctionnalité non dispo depuis l'API", Toast.LENGTH_SHORT).show()
+    }
 }
