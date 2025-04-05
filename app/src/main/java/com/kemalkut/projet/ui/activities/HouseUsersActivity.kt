@@ -47,6 +47,8 @@ class HouseUsersActivity : AppCompatActivity() {
         } else {
             initViews()
         }
+
+        btnbackkk()
     }
 
     private fun initViews() {
@@ -143,6 +145,13 @@ class HouseUsersActivity : AppCompatActivity() {
             giveUserAccess(login)
         } else {
             Toast.makeText(this, "Veuillez saisir un login", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    public fun btnbackkk() {
+        val backButton = findViewById<ImageButton>(R.id.btnBackkk)
+        backButton.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 }

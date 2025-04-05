@@ -77,7 +77,8 @@
                         android:id="@+id/ownerHouseIcon"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:contentDescription="Icône maison propriétaire" />
+                        android:contentDescription="Icône maison propriétaire"
+                        android:background="@drawable/ic_maison"/>
 
                     <LinearLayout
                         android:layout_width="0dp"

@@ -9,20 +9,25 @@
         android:id="@+id/houseItemIcon"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:contentDescription="Icône maison partagée" />
+        android:contentDescription="Icône maison partagée"
+        android:background="@drawable/ic_maison"
+        android:layout_gravity="center"/>
 
     <TextView
         android:id="@+id/houseItemText"
-        android:layout_width="0dp"
+        android:layout_width="261dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="8dp"
         android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@android:color/black"
-        android:layout_marginStart="8dp" />
+        android:layout_gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/houseItemButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Gérer" />
+        android:layout_gravity="center"
+        android:text="Gérer"
+        android:backgroundTint="#A83A36"/>
 </LinearLayout>

@@ -3,6 +3,7 @@ package com.kemalkut.projet.ui.activities
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -35,6 +36,8 @@ class HouseActivity : AppCompatActivity() {
         } else {
             setupHouseTextView()
         }
+        
+        btnbackk()
     }
 
     private fun setupHouseTextView() {
@@ -53,5 +56,12 @@ class HouseActivity : AppCompatActivity() {
         intent.putExtra("HOUSE_ID", houseId)
         intent.putExtra("TOKEN", token)
         startActivity(intent)
+    }
+
+    public fun btnbackk() {
+        val backButton = findViewById<ImageButton>(R.id.btnBackkk)
+        backButton.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
     }
 }

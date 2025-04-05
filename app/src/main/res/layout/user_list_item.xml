@@ -6,17 +6,29 @@
     android:gravity="center_vertical"
     android:weightSum="1">
 
+    <ImageView
+        android:id="@+id/houseItemIcon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="Icône maison partagée"
+        android:background="@drawable/ic_users"
+        android:layout_gravity="center"/>
+
     <TextView
         android:id="@+id/userItemText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
         android:layout_weight="0.7"
         android:text="Utilisateur"
+        android:textColor="@color/white"
         android:textSize="16sp" />
 
     <Button
         android:id="@+id/buttonRemoveUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Supprimer" />
+        android:text="Supprimer"
+        android:backgroundTint="#A83A36"
+        android:layout_gravity="center"/>
 </LinearLayout>
