@@ -60,7 +60,6 @@ class HouseUsersActivity : AppCompatActivity() {
             initViews()
         }
 
-        btnbackkk()
     }
 
     /**
