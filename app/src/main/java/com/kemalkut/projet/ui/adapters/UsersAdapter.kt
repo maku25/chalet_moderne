@@ -19,14 +19,14 @@ class UsersAdapter(
 ) : BaseAdapter(), Filterable {
 
     private var filteredUsers: List<UserHouseAccessData> = dataSource.toList()
-
     private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+
     override fun getCount(): Int {
-        return dataSource.size
+        return filteredUsers.size
     }
 
     override fun getItem(position: Int): UserHouseAccessData {
-        return dataSource[position]
+        return filteredUsers[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -38,10 +38,9 @@ class UsersAdapter(
         val user = getItem(position)
 
         val textView = rowView.findViewById<TextView>(R.id.userItemText)
-        textView.text = "${user.userLogin} ${if (user.owner === 1) "(Propriétaire)" else ""}"
+        textView.text = "${user.userLogin} ${if (user.owner == 1) "(Propriétaire)" else ""}"
 
         val removeButton = rowView.findViewById<Button>(R.id.buttonRemoveUser)
-
         removeButton.visibility = if (user.owner == 1) View.GONE else View.VISIBLE
 
         removeButton.setOnClickListener {
@@ -54,7 +53,7 @@ class UsersAdapter(
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val query = constraint?.toString()?.lowercase() ?: ""
+                val query = constraint?.toString()?.lowercase()?.trim() ?: ""
                 val results = if (query.isEmpty()) {
                     dataSource
                 } else {
@@ -66,7 +65,7 @@ class UsersAdapter(
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                filteredUsers = results?.values as List<UserHouseAccessData>
+                filteredUsers = results?.values as? List<UserHouseAccessData> ?: emptyList()
                 notifyDataSetChanged()
             }
         }

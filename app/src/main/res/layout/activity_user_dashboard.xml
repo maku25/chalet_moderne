@@ -124,7 +124,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:backgroundTint="#A83A36"
-                            android:onClick="handleHouse"
+                            android:onClick="openMainHouse"
                             android:text="Gérer" />
                     </LinearLayout>
                 </LinearLayout>

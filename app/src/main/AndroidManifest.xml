@@ -15,6 +15,15 @@
         android:theme="@style/Theme.Projet"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activities.HouseDeviceShuttersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.HouseDeviceLightsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.HouseDeviceGarageActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activities.HouseDevicesActivity"
             android:exported="false" />
         <activity

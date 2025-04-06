@@ -24,6 +24,7 @@
             android:layout_height="55dp"
             android:layout_gravity="start"
             android:background="@android:color/transparent"
+            android:onClick="btnBack3"
             android:src="@drawable/ic_arrow_back"
             app:tint="@android:color/white" />
 

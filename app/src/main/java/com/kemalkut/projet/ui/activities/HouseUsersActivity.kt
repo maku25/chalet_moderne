@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -12,6 +13,7 @@ import com.kemalkut.projet.api.Api
 import com.kemalkut.projet.model.user.UserAccessRequestData
 import com.kemalkut.projet.model.user.UserHouseAccessData
 import com.kemalkut.projet.ui.adapters.UsersAdapter
+import java.net.URLEncoder
 
 class HouseUsersActivity : AppCompatActivity() {
 
@@ -73,7 +75,7 @@ class HouseUsersActivity : AppCompatActivity() {
             if (responseCode == 200 && userList != null) {
                 users.clear()
                 users.addAll(userList)
-                usersAdapter = UsersAdapter(this, users, ::removeUserAccess)
+                usersAdapter = UsersAdapter(this, users, ::confirmUserRemoval)
                 listViewUsers.adapter = usersAdapter
             } else {
                 Toast.makeText(this, "Erreur chargement utilisateurs (code: $responseCode)", Toast.LENGTH_LONG).show()
@@ -124,22 +126,43 @@ class HouseUsersActivity : AppCompatActivity() {
         }
     }
 
-    private fun removeUserAccess(userLogin: String) {
-        val url = "https://polyhome.lesmoulinsdudev.com/api/houses/$houseId/users/$userLogin"
-
-        Api().delete(url, ::removeUserAccessSuccess, token)
+    private fun confirmUserRemoval(userLogin: String) {
+        AlertDialog.Builder(this)
+            .setTitle("Confirmation")
+            .setMessage("Supprimer l'utilisateur $userLogin de cette maison ?")
+            .setPositiveButton("Oui") { _, _ -> removeUserAccess(userLogin) }
+            .setNegativeButton("Non", null)
+            .show()
     }
 
+    private fun deleteUserAccessWithBody(login: String, callback: (Int) -> Unit) {
+        val url = "https://polyhome.lesmoulinsdudev.com/api/houses/$houseId/users"
+        val body = UserAccessRequestData(login)
+        Api().request(url, "DELETE", callback, body, token)
+    }
+
+    private fun removeUserAccess(userLogin: String) {
+        if (userLogin.isBlank()) {
+            Toast.makeText(this, "Login invalide", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        deleteUserAccessWithBody(userLogin, ::removeUserAccessSuccess)
+    }
+
+
     private fun removeUserAccessSuccess(responseCode: Int) {
-        if (responseCode == 200) {
-            fetchUsersForHouse()
-            Toast.makeText(this, "Accès supprimé", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(this, "Erreur serveur", Toast.LENGTH_SHORT).show()
+        runOnUiThread {
+            if (responseCode == 200) {
+                fetchUsersForHouse()
+                Toast.makeText(this, "Accès supprimé", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Erreur serveur (code $responseCode)", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
-    public fun onAddUserClick(view: View) {
+    fun onAddUserClick(view: View) {
         val login = autoCompleteUserSearch.text.toString().trim()
         if (login.isNotEmpty()) {
             giveUserAccess(login)
@@ -148,7 +171,7 @@ class HouseUsersActivity : AppCompatActivity() {
         }
     }
 
-    public fun btnbackkk() {
+    fun btnbackkk() {
         val backButton = findViewById<ImageButton>(R.id.btnBackkk)
         backButton.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()

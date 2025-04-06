@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.Button
 import android.widget.TextView
 import com.kemalkut.projet.R
 import com.kemalkut.projet.model.house.HouseData
@@ -12,11 +13,12 @@ import com.kemalkut.projet.model.house.HouseData
 /**
  * Adapter pour afficher la liste des maisons partagées dans le UserDashboard.
  * Pour chaque item, il affiche l'ID de la maison et si l'utilisateur en est propriétaire.
- * Un bouton "Gérer" permet de lancer HouseActivity pour la maison correspondante.
+ * Le bouton "Gérer" appelle une fonction passée en paramètre.
  */
 class HouseAdapter(
     private val context: Context,
-    private val houses: ArrayList<HouseData>
+    private val houses: ArrayList<HouseData>,
+    private val onManageClick: (HouseData) -> Unit
 ) : BaseAdapter() {
 
     private val inflater: LayoutInflater =
@@ -33,7 +35,13 @@ class HouseAdapter(
         val house = getItem(position)
 
         val textView = view.findViewById<TextView>(R.id.houseItemText)
-        textView.text = "Maison ${house.houseId} - Propriétaire: ${if (house.owner) "Oui" else "Non"}"
+        val manageButton = view.findViewById<Button>(R.id.houseItemButton)
+
+        textView.text = "Maison ${house.houseId}"
+
+        manageButton.setOnClickListener {
+            onManageClick(house)
+        }
 
         return view
     }

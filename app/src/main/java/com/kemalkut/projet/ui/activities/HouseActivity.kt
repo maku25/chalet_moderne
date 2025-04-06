@@ -36,8 +36,6 @@ class HouseActivity : AppCompatActivity() {
         } else {
             setupHouseTextView()
         }
-        
-        btnbackk()
     }
 
     private fun setupHouseTextView() {
@@ -58,10 +56,7 @@ class HouseActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    public fun btnbackk() {
-        val backButton = findViewById<ImageButton>(R.id.btnBackkk)
-        backButton.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
-        }
+    public fun btnBack3(view: View) {
+        finish()
     }
 }
