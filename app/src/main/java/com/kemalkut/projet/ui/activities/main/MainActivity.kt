@@ -1,4 +1,4 @@
-package com.kemalkut.projet.ui.activities
+package com.kemalkut.projet.ui.activities.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -15,14 +15,13 @@ import com.kemalkut.projet.R
 //user321
 //motdepasse
 
+// github du prof cmeunier-ub
+
 //https://polyhome.lesmoulinsdudev.com/?houseId=505
 
 /**
  * MainActivity: page d'accueil de l'application.
  * Elle permet à l'utilisateur de choisir de se connecter ou de s'inscrire.
- *
- *
- * github du prof cmeunier-ub
  *
  */
 class MainActivity : AppCompatActivity() {

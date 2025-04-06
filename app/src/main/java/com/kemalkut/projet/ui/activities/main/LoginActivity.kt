@@ -1,4 +1,4 @@
-package com.kemalkut.projet.ui.activities
+package com.kemalkut.projet.ui.activities.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,17 +13,16 @@ import com.kemalkut.projet.R
 import com.kemalkut.projet.api.Api
 import com.kemalkut.projet.model.user.AuthResponseData
 import com.kemalkut.projet.model.user.UserData
+import com.kemalkut.projet.ui.activities.dashboard.UserDashboardActivity
 
-// A FAIRE !!!!
-// Vérification des caractères -> uniquement des chiffres et des lettres pour le login et le mdp
+// TODO : Vérifier que le login et le mot de passe contiennent uniquement des chiffres et lettres.
 
 /**
- * LoginActivity gère la connexion de l'utilisateur.
+ * `LoginActivity` — Écran de connexion utilisateur.
  *
- * Elle permet à l'utilisateur de saisir ses identifiants (login et mot de passe),
- * de valider les données saisies, puis d'envoyer une requête d'authentification à l'API.
- * En cas de succès, l'utilisateur est redirigé vers l'activité affichant les périphériques (DevicesActivity),
- * et le token d'authentification est transmis.
+ * Permet à l'utilisateur d'entrer son login et mot de passe,
+ * puis envoie une requête POST à l'API pour obtenir un token d'authentification.
+ * En cas de succès, redirige vers le dashboard utilisateur.
  */
 class LoginActivity : AppCompatActivity() {
 
@@ -31,6 +30,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -39,18 +39,16 @@ class LoginActivity : AppCompatActivity() {
     }
 
     /**
-     * Ferme l'activité actuelle et revient à l'écran précédent.
+     * Ferme cette activité et retourne à l'écran précédent.
      *
-     * @param view La vue déclenchant cet événement (bouton "Retour").
      */
     fun backHome1(view: View) {
         finish()
     }
 
     /**
-     * Lance l'activité d'inscription (RegisterActivity).
+     * Redirige vers l'écran d'inscription (`RegisterActivity`).
      *
-     * @param view La vue déclenchant l'événement (bouton "S'inscrire").
      */
     fun goToRegister(view: View) {
         val intent = Intent(this, RegisterActivity::class.java)
@@ -58,12 +56,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     /**
-     * Tente de connecter l'utilisateur.
+     * Tente de connecter l'utilisateur avec les identifiants saisis.
+     * Vérifie que les champs sont remplis et valides,
+     * puis appelle l'API d'authentification.
      *
-     * Récupère les identifiants saisis, vérifie que les champs ne sont pas vides
-     * et que le mot de passe respecte la longueur minimale, puis envoie une requête d'authentification via l'API.
-     *
-     * @param view La vue déclenchant l'événement (bouton "Se connecter").
      */
     fun login(view: View) {
         val loginView = findViewById<TextView>(R.id.editTextLoginLogin)
@@ -82,6 +78,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         val user = UserData(loginText, passwordText)
+
         Api().post<UserData, AuthResponseData>(
             "https://polyhome.lesmoulinsdudev.com/api/users/auth",
             user,
@@ -90,31 +87,20 @@ class LoginActivity : AppCompatActivity() {
     }
 
     /**
-     * Callback appelé suite à la réponse de l'API d'authentification.
+     * Callback appelé en réponse à l'authentification.
      *
-     * En fonction du code de réponse, cette méthode :
-     * - Si la connexion est réussie (code 200) et l'objet AuthResponse est valide,
-     *   elle extrait le token, affiche un message de succès, puis redirige l'utilisateur vers DevicesActivity.
-     * - Si le code de réponse est 404, cela signifie que le login est inconnu.
-     * - Si le code de réponse est 400, cela signifie que les données envoyées sont incorrectes.
-     * - Pour tout autre code, un message d'erreur générique est affiché.
-     *
-     * @param responseCode Le code HTTP renvoyé par le serveur.
-     * @param authResponse L'objet AuthResponseData contenant le token d'authentification, ou null si la réponse est invalide.
+     * @param responseCode Code HTTP de la réponse.
+     * @param authResponse Objet contenant le token si la réponse est valide.
      */
     fun loginSuccess(responseCode: Int, authResponse: AuthResponseData?) {
-    runOnUiThread {
-            if (responseCode == 200) {
-                if (authResponse != null) {
-                    val token = authResponse.token
-                    Toast.makeText(this, "Connexion réussie", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, UserDashboardActivity::class.java)
-                    intent.putExtra("TOKEN", token)
-                    startActivity(intent)
-                    finish()
-                } else {
-                    Toast.makeText(this, "Erreur lors de la connexion, code: $responseCode", Toast.LENGTH_LONG).show()
-                }
+        runOnUiThread {
+            if (responseCode == 200 && authResponse != null) {
+                val token = authResponse.token
+                Toast.makeText(this, "Connexion réussie", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, UserDashboardActivity::class.java)
+                intent.putExtra("TOKEN", token)
+                startActivity(intent)
+                finish()
             } else if (responseCode == 404) {
                 Toast.makeText(this, "Login inconnu", Toast.LENGTH_LONG).show()
             } else if (responseCode == 400) {
