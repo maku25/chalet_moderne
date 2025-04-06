@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Liste des maisons"
+                android:text="Gerer votre maison"
                 android:textColor="@color/white"
                 android:textSize="24sp"
                 android:textStyle="bold"/>
@@ -77,6 +77,82 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#A83A36"
+                    android:onClick="onOuvrirEtage1"
+                    android:text="Ouvrir étage 1" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#A83A36"
+                    android:onClick="onFermerEtage1"
+                    android:text="Fermer étage 1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#A83A36"
+                    android:onClick="onOuvrirEtage2"
+                    android:text="Ouvrir étage 2" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#A83A36"
+                    android:onClick="onFermerEtage2"
+                    android:text="Fermer étage 2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp">
+
+                <Button
+                    android:id="@+id/btnModeJour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#A83A36"
+                    android:onClick="onButtonModeJour"
+                    android:text="Mode Jour" />
+
+                <Button
+                    android:id="@+id/btnModeNuit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#A83A36"
+                    android:onClick="onButtonModeNuit"
+                    android:text="Mode Nuit" />
+            </LinearLayout>
+
+
             <Button
                 android:id="@+id/btnFunMode"
                 android:layout_width="wrap_content"
@@ -86,51 +162,6 @@
                 android:backgroundTint="#A83A36"
                 android:onClick="onButtonFunModeClic"
                 android:text="Mode fun" />
-
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ouvrir étage 1"
-                android:layout_marginTop="8dp"
-                android:onClick="onOuvrirEtage1" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Fermer étage 1"
-                android:layout_marginTop="4dp"
-                android:onClick="onFermerEtage1" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ouvrir étage 2"
-                android:layout_marginTop="16dp"
-                android:onClick="onOuvrirEtage2" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Fermer étage 2"
-                android:layout_marginTop="4dp"
-                android:onClick="onFermerEtage2" />
-
-            <Button
-                android:id="@+id/btnModeJour"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="Mode Jour"
-                android:onClick="onButtonModeJour" />
-
-            <Button
-                android:id="@+id/btnModeNuit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Mode Nuit"
-                android:onClick="onButtonModeNuit" />
 
 
         </LinearLayout>
