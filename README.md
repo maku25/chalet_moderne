@@ -1,2 +1,5 @@
 # chalet_moderne
-PROGRAMMATION MOBILE ANDROID - Projet
+Projet - Smart Home
+
+KUT Kemal - TP1
+KEITA Sidy Mahmoud - TP1

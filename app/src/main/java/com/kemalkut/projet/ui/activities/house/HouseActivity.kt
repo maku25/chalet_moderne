@@ -1,9 +1,8 @@
-package com.kemalkut.projet.ui.activities
+package com.kemalkut.projet.ui.activities.house
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -12,6 +11,14 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.kemalkut.projet.R
 
+/**
+ * HouseActivity — Activité permettant de gérer une maison spécifique.
+ *
+ * Cette activité affiche un menu avec deux options :
+ * - Gérer les utilisateurs de la maison.
+ * - Gérer les périphériques de la maison.
+ *
+ */
 class HouseActivity : AppCompatActivity() {
 
     private var houseId: Int = -1
@@ -21,6 +28,7 @@ class HouseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_house)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -38,25 +46,43 @@ class HouseActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Met à jour le titre de la maison affiché à l'écran.
+     */
     private fun setupHouseTextView() {
         findViewById<TextView>(R.id.houseTitle).text = "Maison $houseId"
     }
 
-    public fun onManageUsersClick(view: View) {
+    /**
+     * Lance l'activité de gestion des utilisateurs de la maison.
+     *
+     * @param view La vue qui déclenche l'action (bouton "Gérer les utilisateurs").
+     */
+    fun onManageUsersClick(view: View) {
         val intent = Intent(this, HouseUsersActivity::class.java)
         intent.putExtra("HOUSE_ID", houseId)
         intent.putExtra("TOKEN", token)
         startActivity(intent)
     }
 
-    public fun onManageDevicesClick(view: View) {
+    /**
+     * Lance l'activité de gestion des périphériques de la maison.
+     *
+     * @param view La vue qui déclenche l'action (bouton "Gérer les périphériques").
+     */
+    fun onManageDevicesClick(view: View) {
         val intent = Intent(this, HouseDevicesActivity::class.java)
         intent.putExtra("HOUSE_ID", houseId)
         intent.putExtra("TOKEN", token)
         startActivity(intent)
     }
 
-    public fun btnBack3(view: View) {
+    /**
+     * Ferme cette activité et retourne à l'écran précédent.
+     *
+     * @param view La vue déclenchant l'action (bouton retour).
+     */
+    fun btnBack3(view: View) {
         finish()
     }
 }

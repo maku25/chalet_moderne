@@ -1,4 +1,4 @@
-package com.kemalkut.projet.ui.activities
+package com.kemalkut.projet.ui.activities.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,15 +13,13 @@ import com.kemalkut.projet.api.Api
 import com.kemalkut.projet.R
 import com.kemalkut.projet.model.user.UserData
 
-// A FAIRE !!!!
-// Vérification des caractères -> uniquement des chiffres et des lettres pour le login et le mdp
-
-// liés le boutton retour je l'ai changé en Imagebutton et je vois pas ou tu la declarer ( pour les 2 Ui )
+// TODO : Ajouter une vérification des caractères (uniquement chiffres et lettres) pour le login et le mot de passe
 
 /**
- * RegisterActivity gère l'inscription des nouveaux utilisateurs.
- * Elle permet de saisir un login et un mot de passe.
- * et envoie ensuite les données au serveur via l'API.
+ * `RegisterActivity` — Écran d'inscription pour les nouveaux utilisateurs.
+ *
+ * Permet à l'utilisateur de créer un compte en saisissant un login et un mot de passe,
+ * puis envoie les données au backend via une requête POST.
  */
 class RegisterActivity : AppCompatActivity() {
 
@@ -29,6 +27,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_register)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -37,67 +36,56 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     /**
-     * Ferme l'activité actuelle et revient à l'écran précédent.
+     * Ferme l'écran actuel et retourne à la page précédente (MainActivity).
      *
-     * @param view La vue déclenchant cet événement (bouton "Retour").
      */
-    public fun backHome2(view: View) {
+    fun backHome2(view: View) {
         finish()
     }
 
     /**
-     * Lance l'activité de connexion (LoginActivity).
+     * Redirige l'utilisateur vers l'écran de connexion.
      *
-     * @param view La vue déclenchant cet événement (bouton "Se connecter").
      */
-    public fun goToLogin(view: View) {
+    fun goToLogin(view: View) {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
 
     /**
-     * Effectue l'inscription d'un nouvel utilisateur.
-     * Vérifie que les champs de login et mot de passe sont correctement remplis,
-     * puis envoie les données au serveur via l'API.
+     * Gère le clic sur le bouton d'inscription.
      *
-     * @param view La vue déclenchant cet événement (bouton "S'inscrire").
+     * Vérifie les champs saisis (login & mot de passe), puis envoie la requête d'inscription à l'API.
+     *
      */
-    public fun register(view: View) {
-        // Récupère les champs de saisie
+    fun register(view: View) {
         val loginView = findViewById<EditText>(R.id.editTextLoginRegister)
         val passwordView = findViewById<EditText>(R.id.editTextPasswordRegister)
 
-        // Extrait le texte saisi
         val loginText = loginView.text.toString()
         val passwordText = passwordView.text.toString()
 
-        // Vérifie que les deux champs ne sont pas vides
         if (loginText.isEmpty() || passwordText.isEmpty()) {
             Toast.makeText(this, "Veuillez remplir tous les champs", Toast.LENGTH_SHORT).show()
             return
         }
-        // Vérifie que le mot de passe contient au moins 6 caractères
+
         if (passwordText.length < 6) {
             Toast.makeText(this, "Le mot de passe doit contenir au moins 6 caractères", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // Crée un objet UserData avec les informations saisies
         val newUser = UserData(loginText, passwordText)
 
-        // Envoie les données d'inscription à l'API
-        Api().post<UserData>(
-            "https://polyhome.lesmoulinsdudev.com/api/users/register",
-            newUser,
-            ::registerSuccess
-        )
+        Api().post("https://polyhome.lesmoulinsdudev.com/api/users/register", newUser, ::registerSuccess)
     }
 
     /**
-     * Callback appelé après la tentative d'inscription.
-     * Affiche un message en fonction du code de réponse reçu.
+     * Callback déclenché après la tentative d'inscription.
      *
-     * @param responseCode Le code de réponse HTTP renvoyé par le serveur.
+     * Gère les cas d'erreur classiques : conflit (409), mauvaise requête (400), erreur serveur (500).
+     *
+     * @param responseCode Code HTTP de réponse renvoyé par le serveur.
      */
     private fun registerSuccess(responseCode: Int) {
         runOnUiThread {
@@ -109,7 +97,8 @@ class RegisterActivity : AppCompatActivity() {
             } else if (responseCode == 400) {
                 Toast.makeText(this, "Données incorrectes", Toast.LENGTH_LONG).show()
             } else if (responseCode == 500) {
-                Toast.makeText(this, "Une erreur s'est produite au niveau du serveur", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this, "Une erreur s'est produite au niveau du serveur", Toast.LENGTH_LONG).show()
             } else {
                 Toast.makeText(this, "Erreur lors de l'inscription, code: $responseCode", Toast.LENGTH_LONG).show()
             }

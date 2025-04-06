@@ -1,4 +1,4 @@
-package com.kemalkut.projet.ui.activities
+package com.kemalkut.projet.ui.activities.house
 
 import android.os.Bundle
 import android.view.View
@@ -13,8 +13,15 @@ import com.kemalkut.projet.api.Api
 import com.kemalkut.projet.model.user.UserAccessRequestData
 import com.kemalkut.projet.model.user.UserHouseAccessData
 import com.kemalkut.projet.ui.adapters.UsersAdapter
-import java.net.URLEncoder
 
+/**
+ * HouseUsersActivity — Gère les utilisateurs ayant accès à une maison spécifique.
+ *
+ * Fonctionnalités :
+ * - Affiche les utilisateurs actuels d’une maison.
+ * - Permet d’ajouter un utilisateur à la maison via un champ de recherche.
+ * - Permet de retirer l’accès à un utilisateur (hors propriétaire).
+ */
 class HouseUsersActivity : AppCompatActivity() {
 
     private var houseId: Int = -1
@@ -29,6 +36,9 @@ class HouseUsersActivity : AppCompatActivity() {
     private lateinit var usersAdapter: UsersAdapter
     private var allUserLogins: List<String> = emptyList()
 
+    /**
+     * Initialisation de l’activité, vérifie les données et configure les vues.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -53,6 +63,9 @@ class HouseUsersActivity : AppCompatActivity() {
         btnbackkk()
     }
 
+    /**
+     * Initialise les composants de l’interface.
+     */
     private fun initViews() {
         textViewTitle = findViewById(R.id.textViewUsersTitle)
         listViewUsers = findViewById(R.id.listViewUsers)
@@ -65,11 +78,17 @@ class HouseUsersActivity : AppCompatActivity() {
         fetchAllUsers()
     }
 
+    /**
+     * Récupère les utilisateurs ayant accès à la maison.
+     */
     private fun fetchUsersForHouse() {
         val url = "https://polyhome.lesmoulinsdudev.com/api/houses/$houseId/users"
         Api().get<List<UserHouseAccessData>>(url, ::fetchUsersForHouseSuccess, token)
     }
 
+    /**
+     * Callback après récupération des utilisateurs de la maison.
+     */
     private fun fetchUsersForHouseSuccess(responseCode: Int, userList: List<UserHouseAccessData>?) {
         runOnUiThread {
             if (responseCode == 200 && userList != null) {
@@ -83,11 +102,17 @@ class HouseUsersActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Récupère tous les utilisateurs existants (pour l'autocomplétion).
+     */
     private fun fetchAllUsers() {
         val url = "https://polyhome.lesmoulinsdudev.com/api/users"
         Api().get<List<Map<String, String>>>(url, ::fetchAllUsersSuccess, token)
     }
 
+    /**
+     * Callback après récupération des logins de tous les utilisateurs.
+     */
     private fun fetchAllUsersSuccess(code: Int, response: List<Map<String, String>>?) {
         runOnUiThread {
             if (code == 200 && response != null) {
@@ -101,6 +126,11 @@ class HouseUsersActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Donne l’accès à un utilisateur à la maison.
+     *
+     * @param login Login de l'utilisateur à ajouter.
+     */
     private fun giveUserAccess(login: String) {
         val url = "https://polyhome.lesmoulinsdudev.com/api/houses/$houseId/users"
         val data = UserAccessRequestData(login)
@@ -108,24 +138,28 @@ class HouseUsersActivity : AppCompatActivity() {
         Api().post(url, data, ::giveUserAccessSuccess, token)
     }
 
+    /**
+     * Callback : succès ou erreur lors de l'ajout d’un utilisateur à la maison.
+     */
     private fun giveUserAccessSuccess(responseCode: Int) {
         runOnUiThread {
-            if (responseCode == 200) {
-                autoCompleteUserSearch.setText("")
-                fetchUsersForHouse()
-                Toast.makeText(this, "Accès donné", Toast.LENGTH_SHORT).show()
-            } else if (responseCode == 400) {
-                Toast.makeText(this, "L'utilisateur entré n'existe pas", Toast.LENGTH_SHORT).show()
-            } else if (responseCode == 404) {
-                Toast.makeText(this, "Non autorisé", Toast.LENGTH_SHORT).show()
-            } else if (responseCode == 409) {
-                Toast.makeText(this, "L'utilisateur entré a déjà accès", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "Erreur serveur", Toast.LENGTH_SHORT).show()
+            when (responseCode) {
+                200 -> {
+                    autoCompleteUserSearch.setText("")
+                    fetchUsersForHouse()
+                    Toast.makeText(this, "Accès donné", Toast.LENGTH_SHORT).show()
+                }
+                400 -> Toast.makeText(this, "L'utilisateur entré n'existe pas", Toast.LENGTH_SHORT).show()
+                404 -> Toast.makeText(this, "Non autorisé", Toast.LENGTH_SHORT).show()
+                409 -> Toast.makeText(this, "L'utilisateur entré a déjà accès", Toast.LENGTH_SHORT).show()
+                else -> Toast.makeText(this, "Erreur serveur", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
+    /**
+     * Affiche un dialogue de confirmation avant suppression d’un utilisateur.
+     */
     private fun confirmUserRemoval(userLogin: String) {
         AlertDialog.Builder(this)
             .setTitle("Confirmation")
@@ -135,12 +169,18 @@ class HouseUsersActivity : AppCompatActivity() {
             .show()
     }
 
+    /**
+     * Supprime l’accès d’un utilisateur à la maison (via DELETE avec corps).
+     */
     private fun deleteUserAccessWithBody(login: String, callback: (Int) -> Unit) {
         val url = "https://polyhome.lesmoulinsdudev.com/api/houses/$houseId/users"
         val body = UserAccessRequestData(login)
         Api().request(url, "DELETE", callback, body, token)
     }
 
+    /**
+     * Gère la suppression d’accès d’un utilisateur.
+     */
     private fun removeUserAccess(userLogin: String) {
         if (userLogin.isBlank()) {
             Toast.makeText(this, "Login invalide", Toast.LENGTH_SHORT).show()
@@ -150,7 +190,9 @@ class HouseUsersActivity : AppCompatActivity() {
         deleteUserAccessWithBody(userLogin, ::removeUserAccessSuccess)
     }
 
-
+    /**
+     * Callback après suppression d’un accès utilisateur.
+     */
     private fun removeUserAccessSuccess(responseCode: Int) {
         runOnUiThread {
             if (responseCode == 200) {
@@ -162,6 +204,9 @@ class HouseUsersActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Action du bouton "Ajouter" : envoie l’invitation si un login est entré.
+     */
     fun onAddUserClick(view: View) {
         val login = autoCompleteUserSearch.text.toString().trim()
         if (login.isNotEmpty()) {
@@ -171,10 +216,10 @@ class HouseUsersActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Gère le bouton retour (ImageButton).
+     */
     fun btnbackkk() {
-        val backButton = findViewById<ImageButton>(R.id.btnBackkk)
-        backButton.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
-        }
+        finish()
     }
 }

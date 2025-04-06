@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activities.HouseDeviceShuttersActivity"
+    tools:context=".ui.activities.devices.HouseDeviceShuttersActivity"
     android:background="@drawable/background_image">
 
     <LinearLayout
@@ -58,31 +58,30 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="32dp">
 
-                <Button
-                    android:id="@+id/button3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="onButtonShutterUpClic"
-                    android:text="Monter les volets"
-                    android:backgroundTint="#A83A36"/>
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onButtonShutterUpClic"
+        android:text="Button"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="85dp" />
 
-                <Button
-                    android:id="@+id/button4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="onButtonShutterDownClic"
-                    android:text="Baisser les volets"
-                    android:backgroundTint="#A83A36"/>
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onButtonShutterDownClic"
+        android:text="Button"
+        app:layout_constraintTop_toBottomOf="@+id/button3"
+        tools:layout_editor_absoluteX="82dp" />
 
-                <Button
-                    android:id="@+id/button5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="onButtonShutterStopClic"
-                    android:text="Arreter les volets"
-                    android:backgroundTint="#A83A36"/>
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
-
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onButtonShutterStopClic"
+        android:text="Button"
+        app:layout_constraintTop_toBottomOf="@+id/button4"
+        tools:layout_editor_absoluteX="82dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
