@@ -5,32 +5,91 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activities.devices.HouseDeviceGarageActivity">
+    tools:context=".ui.activities.devices.HouseDeviceGarageActivity"
+    android:background="@drawable/background_image">
 
-    <Button
-        android:id="@+id/buttonUpGarage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onButtonUpGarageClic"
-        android:text="ouvir"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="99dp" />
+    <LinearLayout
+        android:layout_width="338dp"
+        android:layout_height="582dp"
+        android:orientation="vertical"
+        android:background="#80000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/buttonDownGarage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onButtonDownGarageClic"
-        android:text="fermer"
-        app:layout_constraintTop_toBottomOf="@+id/buttonUpGarage"
-        tools:layout_editor_absoluteX="107dp" />
+        <ImageButton
+            android:id="@+id/btnBackk4"
+            android:layout_width="48dp"
+            android:layout_height="55dp"
+            android:layout_gravity="start"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="@android:color/white" />
 
-    <Button
-        android:id="@+id/buttonStopGarage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onButtonStopGarageClic"
-        android:text="stop"
-        app:layout_constraintTop_toBottomOf="@+id/buttonDownGarage"
-        tools:layout_editor_absoluteX="105dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Gerer votre garage"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/houseItemIcon"
+            android:layout_width="159dp"
+            android:layout_height="151dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/ic_garage" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_marginTop="52dp">
+            <Button
+                android:id="@+id/buttonUpGarage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onButtonUpGarageClic"
+                android:text="Ouvrir votre garage"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="99dp"
+                android:backgroundTint="#A83A36"/>
+
+            <Button
+                android:id="@+id/buttonDownGarage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onButtonDownGarageClic"
+                android:text="Fermer votre garage"
+                app:layout_constraintTop_toBottomOf="@+id/buttonUpGarage"
+                tools:layout_editor_absoluteX="107dp"
+                android:backgroundTint="#A83A36"/>
+
+            <Button
+                android:id="@+id/buttonStopGarage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onButtonStopGarageClic"
+                android:text="Stop"
+                app:layout_constraintTop_toBottomOf="@+id/buttonDownGarage"
+                tools:layout_editor_absoluteX="105dp"
+                android:backgroundTint="#A83A36"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
